@@ -20,11 +20,9 @@ public class DBConnector {
 	//Constants
 	private static final String IP	     = "localhost";
 	private static final String PORT     = "3306";
-	public  static final String DATABASE = "delfinendbbb"; //delfinen
+	public  static final String DATABASE = "delfinen";
 	private static final String USERNAME = "root"; 
-	private static final String PASSWORD = "root";	   //123       
-          
-
+	private static final String PASSWORD = "123";	          
 	
 	public DBConnector() throws SQLException {
             try {
