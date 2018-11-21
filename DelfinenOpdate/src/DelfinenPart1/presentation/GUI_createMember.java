@@ -147,7 +147,7 @@ public class GUI_createMember extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton1))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGap(88, 88, 88)
+                                    .addGap(94, 94, 94)
                                     .addComponent(firstname))))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
