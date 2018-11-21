@@ -22,7 +22,7 @@ public class DBConnector {
 	private static final String PORT     = "3306";
 	public  static final String DATABASE = "delfinen";
 	private static final String USERNAME = "root"; 
-	private static final String PASSWORD = "1234";	          
+	private static final String PASSWORD = "123";	          
 	
 	public DBConnector() throws SQLException {
             try {
