@@ -7,15 +7,15 @@ package delfinendel1.logic;
 
 /**
  *
- * @author willi
+ * @author William Huusfeldt
  */
 public class Team {
-    
+
     private String teamname;
     private String name;
     private int age;
     private String sex;
-    
+
     public Team(String teamname, String name, int age, String sex) {
         this.age = age;
         this.name = name;
@@ -38,5 +38,5 @@ public class Team {
     public String getSex() {
         return sex;
     }
-    
+
 }

@@ -14,26 +14,25 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author frizz
+ * @author Frederik L.
  */
-public class MemberTest 
-{
-    
+public class MemberTest {
+
     public MemberTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -48,7 +47,6 @@ public class MemberTest
         String expResult = "";
         String result = instance.getfName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
@@ -62,7 +60,6 @@ public class MemberTest
         int expResult = 0;
         int result = instance.getAge();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
@@ -76,7 +73,6 @@ public class MemberTest
         String expResult = "";
         String result = instance.getTeam();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
@@ -121,5 +117,5 @@ public class MemberTest
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
 }

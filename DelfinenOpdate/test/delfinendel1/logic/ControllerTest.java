@@ -8,6 +8,7 @@ package delfinendel1.logic;
 import DelfinenPart1.data.DBConnector;
 import DelfinenPart1.data.DataAccessorDB;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -21,30 +22,28 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author frizz
+ * @author Frederik L.
  */
 public class ControllerTest {
+
     private Controller c;
     private Member mm;
-    private DBConnector connector;
-    
-    
+
     public ControllerTest() {
     }
-    
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -53,41 +52,46 @@ public class ControllerTest {
      * Test of createMember method, of class Controller.
      */
     @Test
-    public void testCreateMember()
-    {
-        //ved ikke lige hvordan man tester void metoder. i bund og grund skal vi jo teste om metoden skriver til databsen
-        
-       try{ 
-            Connection connection = connector.getConnection();
+    public void testCreateMember() {
+
+        try {
+
+            String result = "";
+            String query = "SELECT * FROM member; ";
+            DBConnector cc = new DBConnector();
+            Connection connection = cc.getConnection();
             Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
             connection.setAutoCommit(false);
-            
-            //DBConnector dbcon = new DBConnector();
-            
-            //String query = "Select * from member WHERE firstname = '"+mm.getfName()+"';";
-            stmt.executeUpdate("INSERT INTO top5(discipline) VALUES ('test1')");
-            //stmt.executeQuery("Select * from member WHERE firstname = '"+mm.getfName()+"' AND '"+mm.getAge()+";");
-            stmt.executeQuery("SELECT * FROM top5");
-            
-            //dbcon.("1", "one");
-            
-            assertEquals("test1", stmt.executeQuery("SELECT * FROM top5"));
-            
-            stmt.executeQuery("DELETE FROM top5 where discipline = 'test1");
-           // Member m = new Member(mm.getfName(), mm.getLname(), mm.getAge(), mm.getTeam(), mm.getSex(), mm.getMembership(), mm.getActivePassive());
-            
-            //c.createMember(m);
-            //Member mem = new Member("", "", 0,"","","","");
-            //Member expected = mem;
-            //Member actual = m;
-            
-           // assertEquals(expected, actual);
-       } catch (SQLException ex) {
+
+            Member actmem = null;
+            String fname = "";
+            String lname = "";
+            int age = 0;
+            String team = "";
+            String sex = "";
+            String membership = "";
+            String activity = "";
+
+            while (rs.next()) {
+                fname = rs.getString("firstname");
+                lname = rs.getString("lastname");
+                age = Integer.parseInt(rs.getString("age"));
+                team = rs.getString("team");
+                sex = rs.getString("sex");
+                membership = rs.getString("membership");
+                activity = rs.getString("activity");
+                actmem = new Member(fname, lname, age, team, sex, membership, activity);
+            }
+
+            Member expmem = new Member(mm.getfName(), mm.getLname(), mm.getAge(), mm.getTeam(), mm.getSex(), mm.getMembership(), mm.getActivePassive());
+            c.createMember(expmem);
+            connection.rollback();
+            connection.close();
+
+        } catch (SQLException ex) {
             Logger.getLogger(DataAccessorDB.class.getName()).log(Level.SEVERE, null, ex);
-       }
-       }
-        
-  
-    
-    
+        }
+    }
+
 }

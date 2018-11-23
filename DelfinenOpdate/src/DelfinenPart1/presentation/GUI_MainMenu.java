@@ -12,14 +12,13 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author willi
+ * @author William Huusfeldt, Asger H. Sørensen
  */
 public class GUI_MainMenu extends javax.swing.JFrame {
-    
+
     GUI_createMember guicm = null;
     GUI_ShowMembers guism = null;
     GUI_ShowCompetitiveMembers guiscm = null;
-    //Controller c = null;
 
     /**
      * Creates new form GUI_MainMenu
@@ -117,10 +116,10 @@ public class GUI_MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         guicm = new GUI_createMember();
-         guicm.setVisible(true);
-         //this.setVisible(false);
-         
+        guicm = new GUI_createMember();
+        guicm.setVisible(true);
+        //this.setVisible(false);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -131,7 +130,6 @@ public class GUI_MainMenu extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         guiscm = new GUI_ShowCompetitiveMembers();
         guiscm.setVisible(true);
-        //this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -142,7 +140,7 @@ public class GUI_MainMenu extends javax.swing.JFrame {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */        
+         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -160,19 +158,17 @@ public class GUI_MainMenu extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(GUI_MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GUI_MainMenu().setVisible(true);
-                
-                
+
             }
         });
     }
-    
-    public void setbackground()
-    {
+
+    public void setbackground() {
         this.getContentPane().setBackground(Color.red);
     }
 

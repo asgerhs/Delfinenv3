@@ -10,11 +10,10 @@ import DelfinenPart1.data.DataAccessorDB;
 
 /**
  *
- * @author bruger
+ * @author William Huusfeldt, Asger H. Sørensen.
  */
-
 public class Controller {
-    
+
     DataAccessorDB da = null;
 
     public Controller() {
@@ -26,31 +25,28 @@ public class Controller {
         }
 
     }
-    
-    
-    
-    public void createMember(Member m)
-    {
-        da.createMember(m); 
+
+    public void createMember(Member m) {
+        da.createMember(m);
     }
-    
+
     public void createCompetitiveMember(competitiveMember cm) {
         da.createCompetitiveMember(cm);
     }
-    
-    public void insertBTime(competitiveMember cm) {
-        da.insertBTime(cm);
+
+    public void insertBTime(int ID, double btime) {
+        da.insertBTime(ID, btime);
     }
-    
-    public void insertBSTime(competitiveMember cm) {
-        da.insertBSTime(cm);
+
+    public void insertBSTime(int ID, double bstime) {
+        da.insertBSTime(ID, bstime);
     }
-    
-    public void insertBCTime(competitiveMember cm) {
-        da.insertBCTime(cm);
+
+    public void insertBCTime(int ID, double bctime) {
+        da.insertBCTime(ID, bctime);
     }
-    
-    public void insertCTime(competitiveMember cm) {
-        da.insertCTime(cm);
+
+    public void insertCTime(int ID, double bctime) {
+        da.insertCTime(ID, bctime);
     }
 }

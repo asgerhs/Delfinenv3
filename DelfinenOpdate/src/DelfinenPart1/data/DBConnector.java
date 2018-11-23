@@ -12,17 +12,18 @@ import java.util.Properties;
 
 /**
  *
- * @author bruger
+ * @author Asger H. Sørensen
  */
 public class DBConnector {
     private Connection connection = null;
 	
-	//Constants
 	private static final String IP	     = "localhost";
 	private static final String PORT     = "3306";
-	public  static final String DATABASE = "delfinen";
+	public  static final String DATABASE = "delfinen"; 
 	private static final String USERNAME = "root"; 
 	private static final String PASSWORD = "123";	          
+          
+
 	
 	public DBConnector() throws SQLException {
             try {

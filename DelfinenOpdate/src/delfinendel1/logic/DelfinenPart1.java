@@ -5,21 +5,19 @@ import java.util.List;
 
 /**
  *
- * @author bruger
+ * @author Asger H. Sørensen
  */
 public class DelfinenPart1 {
-    
+
     public static void main(String[] args) {
         DataAccessorDB da = null;
-        try{
+        try {
             da = new DataAccessorDB(new DBConnector());
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         List<Member> members = da.getMembers();
         System.out.println(members);
     }
-    
-    
-    
+
 }

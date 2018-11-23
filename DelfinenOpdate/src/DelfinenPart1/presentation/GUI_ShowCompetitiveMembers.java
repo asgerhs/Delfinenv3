@@ -9,12 +9,19 @@ import DelfinenPart1.data.DBConnector;
 import DelfinenPart1.data.DataAccessorDB;
 import delfinendel1.logic.Controller;
 import delfinendel1.logic.competitiveMember;
+import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author willi
+ * @author William Huusfeldt, Asger H. Sørensen.
  */
 public class GUI_ShowCompetitiveMembers extends javax.swing.JFrame {
 
@@ -24,6 +31,7 @@ public class GUI_ShowCompetitiveMembers extends javax.swing.JFrame {
     DataAccessorDB da = null;
     GUI_MainMenu guimm = null;
     Controller c = new Controller();
+    DBConnector connector = null;
 
     public GUI_ShowCompetitiveMembers() {
         initComponents();
@@ -34,6 +42,14 @@ public class GUI_ShowCompetitiveMembers extends javax.swing.JFrame {
             System.out.println("Setup fail!");
         }
         addTojFrame();
+        this.getContentPane().setBackground(Color.WHITE);
+        this.jTable1_showCM.setBackground(Color.WHITE);
+        this.BackCrawl.setBackground(Color.WHITE);
+        this.Breaststroke.setBackground(Color.WHITE);
+        this.Crawl.setBackground(Color.WHITE);
+        this.IDGoesHere.setBackground(Color.WHITE);
+        this.Butterfly.setBackground(Color.WHITE);
+        this.jButton1.setBackground(Color.WHITE);
     }
 
     /**
@@ -48,11 +64,14 @@ public class GUI_ShowCompetitiveMembers extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1_showCM = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        BackCrawl = new javax.swing.JButton();
+        Breaststroke = new javax.swing.JButton();
+        Crawl = new javax.swing.JButton();
+        Butterfly = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        IDGoesHere = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -61,7 +80,7 @@ public class GUI_ShowCompetitiveMembers extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Fornavn", "Efternavn", "Alder", "Hold", "Køn", "Butterfly", "Crawl", "Rygcrawl", "Bryst"
+                "ID", "Fornavn", "Efternavn", "Alder", "Hold", "Køn", "Butterfly", "Crawl", "Backcrawl", "Breaststroke"
             }
         ));
         jScrollPane1.setViewportView(jTable1_showCM);
@@ -73,26 +92,31 @@ public class GUI_ShowCompetitiveMembers extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Sæt rygcrawl tid");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BackCrawl.setText("Sæt rygcrawl tid");
+        BackCrawl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BackCrawlActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Sæt bryst tid");
-
-        jButton4.setText("Sæt crawl tid");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        Breaststroke.setText("Sæt bryst tid");
+        Breaststroke.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                BreaststrokeActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Sæt butterfly tid");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        Crawl.setText("Sæt crawl tid");
+        Crawl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                CrawlActionPerformed(evt);
+            }
+        });
+
+        Butterfly.setText("Sæt butterfly tid");
+        Butterfly.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButterflyActionPerformed(evt);
             }
         });
 
@@ -102,6 +126,16 @@ public class GUI_ShowCompetitiveMembers extends javax.swing.JFrame {
             }
         });
 
+        IDGoesHere.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IDGoesHereActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("ID:");
+
+        jLabel2.setText("Tid:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,79 +143,90 @@ public class GUI_ShowCompetitiveMembers extends javax.swing.JFrame {
             .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(148, 148, 148)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5)))
-                .addGap(120, 120, 120)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3))
-                .addContainerGap(74, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(IDGoesHere, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Butterfly)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Crawl)
+                        .addGap(3, 3, 3)
+                        .addComponent(BackCrawl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Breaststroke))
+                    .addComponent(jButton1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap())
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IDGoesHere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(Butterfly)
+                    .addComponent(Crawl)
+                    .addComponent(BackCrawl)
+                    .addComponent(Breaststroke)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addGap(12, 12, 12))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //guimm.setVisible(true);
-        //this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void BackCrawlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackCrawlActionPerformed
+        c.insertBCTime(Integer.parseInt(IDGoesHere.getText()), Double.parseDouble(jTextField1.getText()));
+        addTojFrame();
+    }//GEN-LAST:event_BackCrawlActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void CrawlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrawlActionPerformed
+        c.insertCTime(Integer.parseInt(IDGoesHere.getText()), Double.parseDouble(jTextField1.getText()));
+        addTojFrame();
+    }//GEN-LAST:event_CrawlActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void ButterflyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButterflyActionPerformed
         // Butterfly tid
-        DefaultTableModel model = (DefaultTableModel) jTable1_showCM.getModel();
-        int selectedRowIndex = jTable1_showCM.getSelectedRow();
-        //jTable1_showCM.get
-        
-        
-        //competitiveMember cm = jTable1_showCM.getse;
-        //c.insertBTime();
-    }//GEN-LAST:event_jButton5ActionPerformed
+        c.insertBTime(Integer.parseInt(IDGoesHere.getText()), Double.parseDouble(jTextField1.getText()));
+        addTojFrame();
+    }//GEN-LAST:event_ButterflyActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // indtast tid
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void IDGoesHereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDGoesHereActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IDGoesHereActionPerformed
+
+    private void BreaststrokeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BreaststrokeActionPerformed
+        c.insertBSTime(Integer.parseInt(IDGoesHere.getText()), Double.parseDouble(jTextField1.getText()));
+        addTojFrame();
+    }//GEN-LAST:event_BreaststrokeActionPerformed
+
     public void addTojFrame() {
-        
+
         List<competitiveMember> competitiveMembers = da.getCompetitiveMembers();
         DefaultTableModel model = (DefaultTableModel) jTable1_showCM.getModel();
+        model.setRowCount(0);
         for (competitiveMember cm : competitiveMembers) {
-            model.addRow(new Object[]{cm.getFname(), cm.getLname(), cm.getAge(), cm.getTeam(), cm.getSex(), cm.getBtime(), cm.getCtime(), cm.getBctime(), cm.getBstime()});
+            model.addRow(new Object[]{cm.getID(), cm.getFname(), cm.getLname(), cm.getAge(), cm.getTeam(), cm.getSex(), cm.getBtime(), cm.getCtime(), cm.getBctime(), cm.getBstime()});
         }
-        
+
     }
 
     /**
@@ -220,11 +265,14 @@ public class GUI_ShowCompetitiveMembers extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackCrawl;
+    private javax.swing.JButton Breaststroke;
+    private javax.swing.JButton Butterfly;
+    private javax.swing.JButton Crawl;
+    private javax.swing.JTextField IDGoesHere;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1_showCM;
     private javax.swing.JTextField jTextField1;

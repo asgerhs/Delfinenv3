@@ -7,21 +7,22 @@ package DelfinenPart1.presentation;
 
 import DelfinenPart1.data.DBConnector;
 import DelfinenPart1.data.DataAccessorDB;
-import DelfinenPart1.data.DataException;
-import delfinendel1.logic.Controller;
 import delfinendel1.logic.Member;
-import static java.rmi.Naming.list;
-import static java.util.Collections.list;
+import java.awt.Color;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
- * @author bruger
+ * @author Asger H. Sørensen
  */
 public class GUI_ShowMembers extends javax.swing.JFrame {
 
     DataAccessorDB da = null;
+
     public GUI_ShowMembers() {
         initComponents();
         try {
@@ -31,6 +32,11 @@ public class GUI_ShowMembers extends javax.swing.JFrame {
             System.out.println("Setup fail!");
         }
         addTojFrame();
+        this.jTable1.setBackground(Color.WHITE);
+        JTableHeader header = jTable1.getTableHeader();
+        header.setBackground(Color.BLUE);
+        header.setForeground(Color.BLACK);
+
     }
 
     /**
@@ -55,7 +61,14 @@ public class GUI_ShowMembers extends javax.swing.JFrame {
                 "Navn", "Efternavn", "Alder", "Hold", "Køn", "Medlemskab", "Aktivitetsform", "Kontingent"
             }
         ));
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable1.setDragEnabled(true);
+        jTable1.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        jTable1.setSelectionForeground(new java.awt.Color(0, 0, 153));
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(7).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -65,28 +78,21 @@ public class GUI_ShowMembers extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 85, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    public void addTojFrame() 
-    {
-        
+    public void addTojFrame() {
+
         List<Member> members = da.getMembers();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        for(Member m: members)
-        {
+        for (Member m : members) {
             model.addRow(new Object[]{m.getfName(), m.getLname(), m.getAge(), m.getTeam(), m.getSex(), m.getMembership(), m.getActivePassive(), m.getSubscription()});
-        }      
+        }
     }
-    
-    
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

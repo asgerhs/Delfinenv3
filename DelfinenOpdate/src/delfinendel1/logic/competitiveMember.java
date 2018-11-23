@@ -7,21 +7,23 @@ package delfinendel1.logic;
 
 /**
  *
- * @author willi
+ * @author William Huusfeldt, Asger H. Sørensen.
  */
 public class competitiveMember {
 
+    private int id;
     private String fname;
     private String lname;
     private int age;
-    private String team; 
-    private String sex; 
-    private int btime;
-    private int ctime;
-    private int bctime;
-    private int bstime;
+    private String team;
+    private String sex;
+    private double btime;
+    private double ctime;
+    private double bctime;
+    private double bstime;
 
-    public competitiveMember(String fname, String lname, int age, String team, String sex, int btime, int ctime, int bctime, int bstime) {
+    public competitiveMember(int id, String fname, String lname, int age, String team, String sex, double btime, double ctime, double bctime, double bstime) {
+        this.id = id;
         this.fname = fname;
         this.lname = lname;
         this.age = age;
@@ -31,6 +33,10 @@ public class competitiveMember {
         this.ctime = ctime;
         this.bctime = bctime;
         this.bstime = bstime;
+    }
+
+    public int getID() {
+        return id;
     }
 
     public String getFname() {
@@ -53,24 +59,20 @@ public class competitiveMember {
         return sex;
     }
 
-    public int getBtime() {
+    public double getBtime() {
         return btime;
     }
 
-    public int getCtime() {
+    public double getCtime() {
         return ctime;
     }
 
-    public int getBctime() {
+    public double getBctime() {
         return bctime;
     }
 
-    public int getBstime() {
+    public double getBstime() {
         return bstime;
     }
-    
-    
-
-    
 
 }
